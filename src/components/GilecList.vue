@@ -25,11 +25,11 @@
         <li
             class="list-group-item"
             :class="{ active: index == currentIndex }"
-            v-for="(gilec, index) in gilec"
+            v-for="(gilec, index) in citizens"
             :key="index"
             @click="setActiveGilec(gilec, index)"
         >
-          {{ gilec.title }}
+          {{ gilec.first_name }}
         </li>
       </ul>
       <button class="m-3 btn btn-sm btn-danger" @click="removeAllGilec">
@@ -51,7 +51,8 @@
 <!--          {{ currentGilec.published ? "Published" : "Pending" }}-->
 <!--        </div>-->
         <router-link
-            :to="'/gilec/' + currentGilec.id"
+            :to="'/citizens' +
+             '/' + currentGilec.id"
             class="badge badge-warning"
         >Edit</router-link
         >
@@ -73,7 +74,7 @@ export default defineComponent({
   name: "gilec-list",
   data() {
     return {
-      gilec: [] as Gilec[],
+      citizens: [] as Gilec[],
       currentGilec: {} as Gilec,
       currentIndex: -1,
       title: "",
@@ -83,7 +84,7 @@ export default defineComponent({
     retrieveGilec() {
       GilecDataService.getAll()
           .then((response: ResponseData) => {
-            this.gilec = response.data;
+            this.citizens = response.data;
             console.log(response.data);
           })
           .catch((e: Error) => {
@@ -122,7 +123,15 @@ export default defineComponent({
     // },
   },
   mounted() {
-    this.retrieveGilec();
+    GilecDataService.getAll()
+        .then(r => r.json())
+        .then(json => {
+          this.citizens = json;
+          console.log(json)
+        })
+        .catch((e: Error) => {
+          console.log(e);
+        });
   },
 });
 </script>

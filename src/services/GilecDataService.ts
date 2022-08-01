@@ -1,6 +1,6 @@
 ﻿class GilecDataService {
     getAll(): Promise<any> {
-        return  fetch('weatherforecast');
+        return  fetch('citizens');
     }
     // get(id: any): Promise<any> {
     //     return http.get(`/tutorials/${id}`);
