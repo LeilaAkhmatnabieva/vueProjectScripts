@@ -4,11 +4,11 @@ const routes: Array<RouteRecordRaw> = [
     {
         path: "/",
         alias: "/gilec",
-        name: "gilec",
+        name: "gilec-list",
         component: () => import("./components/GilecList.vue"),
     },
     {
-        path: "/gilec/:id",
+        path: "/:id",
         name: "gilec-details",
         component: () => import("./components/GilecDetails.vue"),
     },

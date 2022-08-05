@@ -4,7 +4,7 @@
       <router-link to="/" class="navbar-brand">ГИС СРН</router-link>
       <div class="navbar-nav mr-auto">
         <li class="nav-item">
-          <router-link to="/gilec" class="nav-link">Анкета</router-link>
+          <router-link to="/gilec" class="nav-link">Реестр</router-link>
         </li>
         <li class="nav-item">
           <router-link to="/add" class="nav-link">Добавить</router-link>

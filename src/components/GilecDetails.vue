@@ -1,62 +1,109 @@
 ﻿<template>
   <div v-if="currentGilec.id" class="edit-form">
-    <h4>Gilec</h4>
+    <h4>Редактирование анкеты</h4>
     <form>
       <div class="form-group">
-        <label for="title">Title</label>
+        <label for="first_name">Фамилия</label>
         <input
             type="text"
             class="form-control"
-            id="title"
+            id="first_name"
             v-model="currentGilec.first_name"
         />
       </div>
-<!--      <div class="form-group">-->
-<!--        <label for="description">Description</label>-->
-<!--        <input-->
-<!--            type="text"-->
-<!--            class="form-control"-->
-<!--            id="description"-->
-<!--            v-model="currentGilec.description"-->
-<!--        />-->
-<!--      </div>-->
-<!--      <div class="form-group">-->
-<!--        <label><strong>Status:</strong></label>-->
-<!--        {{ currentGilec.published ? "Published" : "Pending" }}-->
-<!--      </div>-->
+      <div class="form-group">
+        <label for="middle_name">Имя</label>
+        <input
+            type="text"
+            class="form-control"
+            id="middle_name"
+            v-model="currentGilec.middle_name"
+        />
+      </div>
+      <div class="form-group">
+        <label for="last_name">Отчество</label>
+        <input
+            type="text"
+            class="form-control"
+            id="last_name"
+            v-model="currentGilec.last_name"
+        />
+      </div>
+      <div class="form-group">
+        <label for="birth_date">Дата рождения</label>
+        <input
+            type="datetime-local"
+            class="form-control"
+            id="birth_date"
+            v-model="currentGilec.birth_date"
+        />
+      </div>
+      <div class="form-group">
+        <label for="snils">Снилс</label>
+        <input
+            type="number"
+            class="form-control"
+            id="snils"
+            v-model="currentGilec.snils"
+        />
+      </div>
+      <div class="form-group">
+        
+      </div>
+      <div class="b-form-checkbox">
+        <label for="is_auto">Авто</label>
+        <input
+            type="checkbox"
+            class="submit-form"
+            id="is_auto"
+            v-model="currentGilec.is_auto"
+        />
+      </div>
+      <!--      <div class="form-group">-->
+      <!--        <label for="description">Description</label>-->
+      <!--        <input-->
+      <!--            type="text"-->
+      <!--            class="form-control"-->
+      <!--            id="description"-->
+      <!--            v-model="currentGilec.description"-->
+      <!--        />-->
+      <!--      </div>-->
+      <!--      <div class="form-group">-->
+      <!--        <label><strong>Status:</strong></label>-->
+      <!--        {{ currentGilec.published ? "Published" : "Pending" }}-->
+      <!--      </div>-->
     </form>
-<!--    <button-->
-<!--        class="badge badge-primary mr-2"-->
-<!--        v-if="currentGilec.published"-->
-<!--        @click="updatePublished(false)"-->
-<!--    >-->
-<!--      UnPublish-->
-<!--    </button>-->
-<!--    <button-->
-<!--        v-else-->
-<!--        class="badge badge-primary mr-2"-->
-<!--        @click="updatePublished(true)"-->
-<!--    >-->
-<!--      Publish-->
-<!--    </button>-->
-    <button class="badge badge-danger mr-2" @click="deleteGilec">
+    <!--    <button-->
+    <!--        class="badge badge-primary mr-2"-->
+    <!--        v-if="currentGilec.published"-->
+    <!--        @click="updatePublished(false)"-->
+    <!--    >-->
+    <!--      UnPublish-->
+    <!--    </button>-->
+    <!--    <button-->
+    <!--        v-else-->
+    <!--        class="badge badge-primary mr-2"-->
+    <!--        @click="updatePublished(true)"-->
+    <!--    >-->
+    <!--      Publish-->
+    <!--    </button>-->
+    <button class="btn btn-danger" @click="deleteGilec">
       Delete
     </button>
-    <button type="submit" class="badge badge-success" @click="updateGilec">
+    <button class="btn btn-success" @click="updateGilec">
       Update
     </button>
     <p>{{ message }}</p>
   </div>
   <div v-else>
-    <br />
-    <p>Please click on a Tutorial...</p>
+    <br/>
+    <p>Выберите гражданина</p>
   </div>
 </template>
 <script lang="ts">
-import { defineComponent } from "vue";
-//import GilecDataService from "@/services/GilecDataService";
+import {defineComponent} from "vue";
 import Gilec from "@/Models/Gilec";
-//import ResponseData from "@/Models/ResponseData";
+import GilecDataService from "@/services/GilecDataService";
 export default defineComponent({
   name: "gilec-details",
   data() {
@@ -68,58 +115,49 @@ export default defineComponent({
     };
   },
   methods: {
-    getGilec(): void {
-      this.post = null;
-      this.loading = true;
-      fetch('weatherforecast')
+    getGilec(id: any) {
+      GilecDataService.get(id)
           .then(r => r.json())
           .then(json => {
-            this.currentGilec = json as Gilec;
-            this.loading = false;
-            return;
+            this.currentGilec = json;
+            console.log(json)
+          })
+          .catch((e: Error) => {
+            console.log(e);
           });
     },
-  //   updatePublished(status: boolean) {
-  //     let data = {
-  //       id: this.currentTutorial.id,
-  //       title: this.currentTutorial.title,
-  //       description: this.currentTutorial.description,
-  //       published: status,
-  //     };
-  //     GilecDataService.update(this.currentTutorial.id, data)
-  //         .then((response: ResponseData) => {
-  //           console.log(response.data);
-  //           this.currentTutorial.published = status;
-  //           this.message = "The status was updated successfully!";
-  //         })
-  //         .catch((e: Error) => {
-  //           console.log(e);
-  //         });
-  //   },
-  //   updateTutorial() {
-  //     GilecDataService.update(this.currentTutorial.id, this.currentTutorial)
-  //         .then((response: ResponseData) => {
-  //           console.log(response.data);
-  //           this.message = "The tutorial was updated successfully!";
-  //         })
-  //         .catch((e: Error) => {
-  //           console.log(e);
-  //         });
-  //   },
-  //   deleteTutorial() {
-  //     GilecDataService.delete(this.currentTutorial.id)
-  //         .then((response: ResponseData) => {
-  //           console.log(response.data);
-  //           this.$router.push({ name: "tutorials" });
-  //         })
-  //         .catch((e: Error) => {
-  //           console.log(e);
-  //         });
-  //   },
+    updateGilec() {
+      if (!this.currentGilec.first_name || !this.currentGilec.middle_name || !this.currentGilec.last_name)
+      {
+         this.message = "Заполните ФИО";
+         return;
+      }
+      
+      GilecDataService.update(this.currentGilec)
+          .then(r => r.json())
+          .then(json => {
+            console.log('Success:', json);
+            this.message = "Данные успешно обновлены";
+          })
+          .catch((error) => {
+            console.error('Error:', error);
+          });
+    },
+    deleteGilec() {
+      GilecDataService.delete(this.currentGilec.id)
+          .then(r => r.json())
+          .then(json => {
+            console.log(json);
+            this.message = "Данные успешно удалены";
+          })
+          .catch((e: Error) => {
+            console.log(e);
+          });
+    },
   },
   mounted() {
     this.message = "";
-    this.getGilec();
+    this.getGilec(this.$route.params.id);
   },
 });
 </script>

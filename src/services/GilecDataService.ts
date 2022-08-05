@@ -1,24 +1,35 @@
-﻿class GilecDataService {
+﻿import Gilec from "@/Models/Gilec";
+
+class GilecDataService {
     getAll(): Promise<any> {
-        return  fetch('citizens');
+        return  fetch('citizens/Get');
     }
-    // get(id: any): Promise<any> {
-    //     return http.get(`/tutorials/${id}`);
-    // }
-    // create(data: any): Promise<any> {
-    //     return http.post("/tutorials", data);
-    // }
-    // update(id: any, data: any): Promise<any> {
-    //     return http.put(`/tutorials/${id}`, data);
-    // }
-    // delete(id: any): Promise<any> {
-    //     return http.delete(`/tutorials/${id}`);
-    // }
-    // deleteAll(): Promise<any> {
-    //     return http.delete(`/tutorials`);
-    // }
-    // findByTitle(title: string): Promise<any> {
-    //     return http.get(`/tutorials?title=${title}`);
+    get(id: any): Promise<any> {
+        return  fetch(`citizens/GetById?id=${id}`);
+    }
+    create(gil: any): Promise<any> {
+        return fetch(`citizens/Add`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(gil),
+        });
+    }
+    update(gil: Gilec): Promise<any> {
+        return fetch(`citizens/Update`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(gil),
+        });
+    }
+    delete(id: any): Promise<any> {
+        return fetch(`citizens/Delete?id=${id}`);
+    }
+    // findByTitle(title: string): Promise<any> {//сомнительная штука, надо бы сортирнуть на фронте 
+    //     return fetch(`citizens?title=${title}`);
     // }
 }
 export default new GilecDataService();
