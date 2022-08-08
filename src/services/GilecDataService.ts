@@ -28,8 +28,5 @@ class GilecDataService {
     delete(id: any): Promise<any> {
         return fetch(`citizens/Delete?id=${id}`);
     }
-    // findByTitle(title: string): Promise<any> {//сомнительная штука, надо бы сортирнуть на фронте 
-    //     return fetch(`citizens?title=${title}`);
-    // }
 }
 export default new GilecDataService();

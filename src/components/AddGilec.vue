@@ -1,40 +1,18 @@
 ﻿<template>
-  <div class="submit-form">
-    <div v-if="!submitted">
-      <div class="form-group">
+  <div v-if="!submitted">
+    <div class="form-group row">
+      <div class="form-group col-md-6 mb-3">
         <label for="first_name">Фамилия</label>
-        <input
-            type="text"
+        <vue-mask
             class="form-control"
             id="first_name"
-            required
+            mask="ABBBBBBBBBBBBBBBB"
             v-model="gilec.first_name"
-            name="Фамилия"
+            :raw="false"
+            :options = options
         />
       </div>
-      <div class="form-group">
-        <label for="middle_name">Имя</label>
-        <input
-            type="text"
-            class="form-control"
-            id="middle_name"
-            required
-            v-model="gilec.middle_name"
-            name="Имя"
-        />
-      </div>
-      <div class="form-group">
-        <label for="last_name">Отчество</label>
-        <input
-            type="text"
-            class="form-control"
-            id="last_name"
-            required
-            v-model="gilec.last_name"
-            name="Отчество"
-        />
-      </div>
-      <div class="<form-group>">
+      <div class="form-group col-md-6 mb-3">
         <label for="birth_date">Дата рождения</label>
         <input
             type="date"
@@ -42,10 +20,22 @@
             id="birth_date"
             required
             v-model="gilec.birth_date"
-            name="Дата рождения"
         />
       </div>
-      <div class="form-group">
+    </div>
+    <div class="form-group row">
+      <div class="form-group col-md-6 mb-3">
+        <label for="middle_name">Имя</label>
+        <vue-mask
+            class="form-control"
+            id="middle_name"
+            mask="ABBBBBBBBBBBBBBBB"
+            v-model="gilec.middle_name"
+            :raw="false"
+            :options = options
+        />
+      </div>
+      <div class="form-group col-md-6 mb-3">
         <label for="snils">СНИЛС</label>
         <input
             type="number"
@@ -53,34 +43,50 @@
             id="snils"
             required
             v-model="gilec.snils"
-            name="СНИЛС"
         />
       </div>
-      <div class="<b-form-checkbox>">
-        <label for="is_auto">Авто</label>
+    </div>
+    <div class="form-group row">
+      <div class="form-group col-md-6 mb-3">
+        <label for="last_name">Отчество</label>
+        <vue-mask
+            class="form-control"
+            id="last_name"
+            mask="ABBBBBBBBBBBBBBBB"
+            v-model="gilec.last_name"
+            :raw="false"
+            :options = options
+        />
+      </div>
+    </div>
+    <div class="form-group col-md-1 mb-3">
+      <div class="form-check">
         <input
             type="checkbox"
-            class="submit-form"
+            class="form-check-input"
             id="is_auto"
             required
             v-model="gilec.is_auto"
-            name="Авто"
         />
+        <label class="form-check-label" for="is_auto">Авто </label>
       </div>
-      <button @click="saveGilec" class="btn btn-success">Сохарнить</button>
     </div>
-    <div v-else>
-      <h4>Успешно добавлен</h4>
-      <button class="btn btn-success" @click="newGilec">Добавить</button>
-    </div>
+    <button @click="saveGilec" class="btn btn-success">Сохарнить</button>
+  </div>
+  <div v-else>
+    <h4>Успешно добавлен</h4>
+    <button class="btn btn-success" @click="newGilec">Добавить</button>
   </div>
 </template>
+
 <script lang="ts">
-import { defineComponent } from "vue";
+import {defineComponent} from "vue";
 import GilecDataService from "@/services/GilecDataService";
 import Gilec from "@/Models/Gilec";
+const vueMask = require('vue-jquery-mask');
 //import ResponseData from "@/Models/ResponseData";
 export default defineComponent({
+  components: {vueMask},
   name: "add-gilec",
   data() {
     return {
@@ -89,6 +95,12 @@ export default defineComponent({
         first_name: "",
       } as Gilec,
       submitted: false,
+      options: {
+        translation:{
+          A: {pattern: /[А-Я]/},
+          B: {pattern: /[а-я]/}
+        }
+      }
     };
   },
   methods: {
@@ -104,7 +116,6 @@ export default defineComponent({
       };
       GilecDataService.create(data)
           .then(json => {
-            //this.gilec.id = r.data.id;
             console.log(json);
             this.submitted = true;
           })
@@ -121,7 +132,7 @@ export default defineComponent({
 </script>
 <style>
 .submit-form {
-  max-width: 300px;
+  max-width: 2500px;
   margin: auto;
 }
 </style>

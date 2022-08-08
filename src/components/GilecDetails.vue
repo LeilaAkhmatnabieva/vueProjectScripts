@@ -59,34 +59,7 @@
             v-model="currentGilec.is_auto"
         />
       </div>
-      <!--      <div class="form-group">-->
-      <!--        <label for="description">Description</label>-->
-      <!--        <input-->
-      <!--            type="text"-->
-      <!--            class="form-control"-->
-      <!--            id="description"-->
-      <!--            v-model="currentGilec.description"-->
-      <!--        />-->
-      <!--      </div>-->
-      <!--      <div class="form-group">-->
-      <!--        <label><strong>Status:</strong></label>-->
-      <!--        {{ currentGilec.published ? "Published" : "Pending" }}-->
-      <!--      </div>-->
     </form>
-    <!--    <button-->
-    <!--        class="badge badge-primary mr-2"-->
-    <!--        v-if="currentGilec.published"-->
-    <!--        @click="updatePublished(false)"-->
-    <!--    >-->
-    <!--      UnPublish-->
-    <!--    </button>-->
-    <!--    <button-->
-    <!--        v-else-->
-    <!--        class="badge badge-primary mr-2"-->
-    <!--        @click="updatePublished(true)"-->
-    <!--    >-->
-    <!--      Publish-->
-    <!--    </button>-->
     <button class="btn btn-danger" @click="deleteGilec">
       Delete
     </button>
