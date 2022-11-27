@@ -84,7 +84,6 @@ import {defineComponent} from "vue";
 import GilecDataService from "@/services/GilecDataService";
 import Gilec from "@/Models/Gilec";
 const vueMask = require('vue-jquery-mask');
-//import ResponseData from "@/Models/ResponseData";
 export default defineComponent({
   components: {vueMask},
   name: "add-gilec",
@@ -130,9 +129,3 @@ export default defineComponent({
   },
 });
 </script>
-<style>
-.submit-form {
-  max-width: 2500px;
-  margin: auto;
-}
-</style>

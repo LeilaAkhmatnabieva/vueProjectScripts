@@ -1,24 +1,5 @@
 <template>
   <div class="list row">
-<!--    <div class="col-md-8">-->
-<!--      <div class="input-group mb-3">-->
-<!--        <input-->
-<!--            type="text"-->
-<!--            class="form-control"-->
-<!--            placeholder="Поиск по ФИО"-->
-<!--            v-model="title"-->
-<!--        />-->
-<!--        <div class="input-group-append">-->
-<!--          <button-->
-<!--              class="btn btn-outline-secondary"-->
-<!--              type="button"-->
-<!--              @click="searchTitle"-->
-<!--          >-->
-<!--            Поиск-->
-<!--          </button>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </div>-->
     <div class="col-md-6">
       <h4>Реестр граждан:</h4>
       <table class="table table-bordered table-hover">
@@ -31,7 +12,7 @@
         </thead>
         <tbody>
         <tr
-            :class="{ active: index == currentIndex }"
+            :class="{ active: index === currentIndex }"
             v-for="(gilec, index) in citizens"
             :key="index"
             @click="setActiveGilec(gilec, index)">
@@ -41,18 +22,6 @@
         </tr>
         </tbody>
       </table>
-      
-<!--      <ul class="list-group">-->
-<!--        <li-->
-<!--            class="list-group-item"-->
-<!--            :class="{ active: index == currentIndex }"-->
-<!--            v-for="(gilec, index) in citizens"-->
-<!--            :key="index"-->
-<!--            @click="setActiveGilec(gilec, index)"-->
-<!--        >-->
-<!--          {{ gilec.first_name }} {{gilec.middle_name}}-->
-<!--        </li>-->
-<!--      </ul>-->
     </div>
     <div class="col-md-6">
       <div v-if="currentGilec.id">
@@ -94,7 +63,6 @@
 import { defineComponent } from "vue";
 import GilecDataService from "@/services/GilecDataService";
 import Gilec from "@/Models/Gilec";
-//import ResponseData from "@/Models/ResponseData";
 
 export default defineComponent({
   name: "gilec-list",
@@ -126,18 +94,7 @@ export default defineComponent({
     setActiveGilec(gilec: Gilec, index = -1) {
       this.currentGilec = gilec;
       this.currentIndex = index;
-    },
-    // searchTitle() {
-    //   GilecDataService.findByTitle(this.title)
-    //       .then((response: ResponseData) => {
-    //         this.citizens = response.data;
-    //         this.setActiveGilec({} as Gilec);
-    //         console.log(response.data);
-    //       })
-    //       .catch((e: Error) => {
-    //         console.log(e);
-    //       });
-    // },
+    }
   },
   mounted() {
     this.retrieveGilec();

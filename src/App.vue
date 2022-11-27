@@ -19,7 +19,6 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-//import GilecList from './components/GilecList.vue';
 
 export default defineComponent({
   name: "App",

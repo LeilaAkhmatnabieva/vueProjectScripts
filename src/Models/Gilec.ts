@@ -6,8 +6,4 @@ export default interface Gilec {
   birth_date: Date;
   snils: number;
   is_auto: boolean;
-  // id: null;
-  // title: string;
-  // description: string;
-  // published: boolean;
 }

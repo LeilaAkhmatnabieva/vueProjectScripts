@@ -2,7 +2,7 @@
   <div v-if="currentGilec.id" class="edit-form">
     <h4>Редактирование анкеты</h4>
     <form>
-      <div class="form-group">
+      <div class="form-group mb-3">
         <label for="first_name">Фамилия</label>
         <input
             type="text"
@@ -11,7 +11,7 @@
             v-model="currentGilec.first_name"
         />
       </div>
-      <div class="form-group">
+      <div class="form-group mb-3">
         <label for="middle_name">Имя</label>
         <input
             type="text"
@@ -20,7 +20,7 @@
             v-model="currentGilec.middle_name"
         />
       </div>
-      <div class="form-group">
+      <div class="form-group mb-3">
         <label for="last_name">Отчество</label>
         <input
             type="text"
@@ -29,7 +29,7 @@
             v-model="currentGilec.last_name"
         />
       </div>
-      <div class="form-group">
+      <div class="form-group mb-3">
         <label for="birth_date">Дата рождения</label>
         <input
             type="datetime-local"
@@ -38,7 +38,7 @@
             v-model="currentGilec.birth_date"
         />
       </div>
-      <div class="form-group">
+      <div class="form-group mb-3">
         <label for="snils">Снилс</label>
         <input
             type="number"
@@ -47,10 +47,7 @@
             v-model="currentGilec.snils"
         />
       </div>
-      <div class="form-group">
-        
-      </div>
-      <div class="b-form-checkbox">
+      <div class="b-form-checkbox mb-3">
         <label for="is_auto">Авто</label>
         <input
             type="checkbox"
